@@ -22,6 +22,17 @@ bool ModuleSceneIntro::Start()
 
 	// TODO 2: Chain few N spheres together to form a snake
 
+	for (int i = 0; i < MAX_SNAKE; i++) {
+		s_snake[i] = Sphere(1.0F);
+		s_snake[i].color.Set(0.50*i,0.00*i,0.60*i,1.0);
+		pb_snake[i] = App->physics->AddBody(s_snake[i]);
+	}
+
+	
+	for (int i = 0; i < MAX_SNAKE-1; i++) {
+	App->physics->AddConstraintP2P(*pb_snake[i], *pb_snake[i+1], { 0,0,0 }, {3,0,0});
+	}
+
 	// TODO 4: Chain few N spheres together to form a a bike's sphere
 	// Be sure to put the right axis
 
@@ -43,14 +54,14 @@ update_status ModuleSceneIntro::Update(float dt)
 	p.axis = true;
 	p.Render();
 
-	/* Uncomment when ready
+	
 	for(int i = 0; i < MAX_SNAKE; ++i)
 	{
 		pb_snake[i]->GetTransform(&(s_snake[i].transform));
 		s_snake[i].Render();
 	}
 
-	for(int i = 0; i < MAX_SNAKE; ++i)
+	/*for(int i = 0; i < MAX_SNAKE; ++i)
 	{
 		pb_snake2[i]->GetTransform(&(s_snake2[i].transform));
 		s_snake2[i].Render();
