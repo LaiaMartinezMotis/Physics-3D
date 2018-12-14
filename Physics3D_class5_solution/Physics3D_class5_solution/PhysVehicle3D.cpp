@@ -102,3 +102,14 @@ float PhysVehicle3D::GetKmh() const
 {
 	return vehicle->getCurrentSpeedKmHour();
 }
+
+vec3 PhysVehicle3D::GetForwardVector()
+{
+	btVector3 viewdirection;
+	viewdirection = vehicle->getForwardVector();
+	vec3 cardirection;
+	cardirection.Set(viewdirection.x(), viewdirection.y(), viewdirection.z());
+
+	return vec3();
+}
+
